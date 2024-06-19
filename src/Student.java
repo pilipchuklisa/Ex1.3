@@ -1,24 +1,28 @@
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Student{
+public class Student {
+    private List<Observer> observers;
     private String status;
-    private PropertyChangeSupport support;
 
     public Student() {
-        support = new PropertyChangeSupport(this);
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        support.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        support.removePropertyChangeListener(listener);
+        this.observers = new ArrayList<>();
     }
 
     public void setStatus(String status) {
-        support.firePropertyChange("news", this.status, status);
         this.status = status;
+        notifyObservers();
+    }
+
+    public void registerObserver(Observer o) {
+        observers.add(o);
+    }
+
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    public void notifyObservers() {
+        observers.forEach((observer)-> observer.update(status));
     }
 }

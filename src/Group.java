@@ -1,7 +1,4 @@
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-public class Group implements PropertyChangeListener {
+public class Group implements Observer {
 
     private String name;
 
@@ -10,11 +7,7 @@ public class Group implements PropertyChangeListener {
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        this.setStatus((String) evt.getNewValue());
-    }
-
-    public void setStatus(String news) {
-        System.out.println(name + " узнала: " + news);
+    public void update(String event) {
+        System.out.println(name + " узнала: " + event);
     }
 }

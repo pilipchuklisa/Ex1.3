@@ -6,12 +6,12 @@ public class Main {
 
         student.setStatus("Статус 1");
 
-        student.addPropertyChangeListener(group1);
-        student.addPropertyChangeListener(group2);
+        student.registerObserver(group1);
+        student.registerObserver(group2);
 
         student.setStatus("Статус 2");
 
-        student.removePropertyChangeListener(group1);
+        student.removeObserver(group1);
 
         student.setStatus("Статус 3");
     }
